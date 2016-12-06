@@ -1,10 +1,13 @@
 defmodule Friend do
 
-  def listen do
+  def listen(state \\ %{}) do
     receive do
-      :hi ->
-        IO.puts("Hello there!")
-        listen()
+      {:set, key, value} ->
+        new_state = Map.put(state, key, value)
+        listen(new_state)
+      {:get, key} ->
+        IO.puts(Map.get(state, key))
+        listen(state)
       _ ->
         nil
     end
