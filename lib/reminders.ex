@@ -9,6 +9,7 @@ defmodule Reminders do
     # Define workers and child supervisors to be supervised
     children = [
       # Starts a worker by calling: Reminders.Worker.start_link(arg1, arg2, arg3)
+      worker(Reminders.Store, []),
       worker(Reminders.Client, []),
     ]
 
